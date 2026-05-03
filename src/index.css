@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #050608;
+  --color-cyan: #00f0ff;
+  --color-ink: #e2e8f0;
+  --color-line: rgba(0, 240, 255, 0.3);
+  --color-dark-card: rgba(15, 17, 23, 0.8);
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-serif: "Playfair Display", "Georgia", serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-bg text-ink font-sans antialiased overflow-hidden selection:bg-cyan/30 selection:text-cyan;
+    background-image: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.03) 0%, transparent 70%);
+  }
+}
+
+.custom-mini-scrollbar::-webkit-scrollbar {
+  width: 2px;
+}
+.custom-mini-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-mini-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.2);
+}
+.custom-mini-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 240, 255, 0.5);
+}
+
+.technical-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  height: 100vh;
+  border: 4px solid #1a1c23;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  @apply border-r border-cyan/20 bg-black/60 p-6 flex flex-col gap-6 backdrop-blur-sm;
+}
+
+.content-area {
+  @apply p-8 overflow-y-auto relative;
+}
+
+.card-technical {
+  @apply bg-dark-card border border-white/10 p-6 transition-all rounded-sm focus-within:border-cyan/50;
+}
+
+.card-technical:hover {
+  @apply border-cyan/50;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.2), inset 0 0 2px rgba(0, 240, 255, 0.5);
+}
+
+.header-serif {
+  @apply font-mono text-cyan/60 text-[10px] uppercase tracking-widest mb-1;
+}
+
+.data-mono {
+  @apply font-mono text-sm tracking-tight text-white;
+}
+
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.2), inset 0 0 2px rgba(0, 240, 255, 0.5);
+}
+
+.scanner-line {
+  @apply w-full h-[60px] absolute top-[-60px] left-0 pointer-events-none opacity-10 z-50;
+  background: linear-gradient(to bottom, transparent, #00f0ff, transparent);
+  animation: scan 6s linear infinite;
+}
+
+@keyframes scan {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100vh); }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 3px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-cyan/20;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-cyan/40;
+}
+
+.writing-mode {
+  @apply relative max-w-3xl mx-auto py-20 px-4;
+}
+
+.tab-indicator {
+  @apply absolute bottom-0 left-0 h-[2px] bg-cyan transition-all duration-300;
+}
+
+.noise-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.03;
+  z-index: 99;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
